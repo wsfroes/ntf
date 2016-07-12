@@ -63,6 +63,7 @@ before_install:
   - sudo pip install ctypesgen
   - sudo apt-get remove python-scapy
   - git clone https://github.com/p4lang/scapy-vxlan.git && cd scapy-vxlan && sudo python setup.py install && cd ..
+  - sudo ldconfig
   - bash CI/travis/build_compile_switch.sh
 
 install:
