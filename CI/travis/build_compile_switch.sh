@@ -36,5 +36,5 @@ git submodule update --init --recursive
 ./autogen.sh
 mkdir -p $BUILD_TARGET/switch
 cd $BUILD_TARGET/switch
-$SUBMODULE/configure --with-bmv2 --with-switchsai --enable-thrift --prefix=$TARGET
+$SUBMODULE/configure --with-bmv2 --with-switchlink --enable-thrift --prefix=$TARGET
 make
