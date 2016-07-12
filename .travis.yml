@@ -1,0 +1,73 @@
+# Config file for automatic testing at travis-ci.org
+
+sudo: required
+
+language: cpp
+
+services:
+  - docker
+
+addons:
+  apt:
+    sources:
+      - boost-latest
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.6
+    packages:
+      - libjudy-dev
+      - libgmp-dev
+      - libpcap-dev
+      - libboost-dev
+      - libboost-test-dev
+      - libboost-program-options-dev
+      - libboost-system-dev
+      - libboost-filesystem-dev
+      - libboost-thread-dev
+      - libboost-test-dev
+      - libevent-dev
+      - automake
+      - libtool
+      - flex 
+      - bison
+      - pkg-config
+      - g++
+      - libssl-dev
+      - doxygen
+      - git
+      - libedit-dev
+      - libevent-dev
+      - libfreetype6-dev
+      - libpng-dev
+      - libyaml-0-2
+      - libbz2-dev
+      - libnl-route-3-dev
+      - openssl
+      - pkg-config
+      - python-dev
+      - python-matplotlib
+      - python-numpy
+      - python-pip
+      - python-scipy
+      - python-setuptools
+      - python-yaml
+
+before_install:
+  - wget https://s3-us-west-2.amazonaws.com/p4lang/thrift_bin.tar.gz
+  - tar -xzvf thrift_bin.tar.gz -C $HOME/
+  - export PATH=$PATH:$HOME/thrift/bin/
+  - export LDFLAGS="$LDFLAGS -L$HOME/thrift/lib"
+  - export CPPFLAGS="$CPPFLAGS -I$HOME/thrift/include"
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/thrift/lib
+  - sudo pip install --upgrade thrift
+  - sudo apt-get install ethtool
+  - sudo pip install ctypesgen
+  - sudo apt-get remove python-scapy
+  - git clone https://github.com/p4lang/scapy-vxlan.git && cd scapy-vxlan && sudo python setup.py install && cd ..
+  - bash CI/travis/build_compile_switch.sh
+
+install:
+  - cd makefiles && make -f docker.mk bmv2-docker-image && cd ..
+
+# command to run tests, e.g. python setup.py test
+script:
+  - docker images | grep p4dockerswitch_bmv2
