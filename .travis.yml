@@ -67,7 +67,7 @@ before_install:
   - bash CI/travis/build_compile_switch.sh
 
 install:
-  - cd makefiles && make -f docker.mk bmv2-docker-image && cd ..
+  - cd makefiles && make -f docker.mk travis-docker-image && cd ..
 
 # command to run tests, e.g. python setup.py test
 script:
