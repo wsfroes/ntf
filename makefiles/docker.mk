@@ -18,9 +18,8 @@ setup-docker-image:
 	@sudo rm -fr /tmp/docker_tmp
 	@mkdir -p /tmp/docker_tmp/ntf
 	@cp -r $(thisdir)/../docker/* /tmp/docker_tmp
-	@cp -rf $(thisdir)/../../ntf/bmv2 /tmp/docker_tmp/ntf
-	@cp -rf $(thisdir)/../../p4-hlir /tmp/docker_tmp/ntf
-	@cp -rf $(thisdir)/../../ntf/tools /tmp/docker_tmp/ntf
+	@cp -rf $(thisdir)/../bmv2 /tmp/docker_tmp/ntf
+	@cp -rf $(thisdir)/../tools /tmp/docker_tmp/ntf
 	@cp /tmp/docker_tmp/start.sh /tmp/docker_tmp/ntf/tools/start.sh
 	@cp /tmp/docker_tmp/startv2.sh /tmp/docker_tmp/ntf/tools/startv2.sh
 	@cp /tmp/docker_tmp/bm_start.sh /tmp/docker_tmp/ntf/tools/bm_start.sh
@@ -29,17 +28,3 @@ bmv2-docker-image : setup-docker-image
 	@echo "CMD /bin/bash" >> /tmp/docker_tmp/Dockerfile
 	@sudo docker build -t p4dockerswitch_bmv2 /tmp/docker_tmp
 	@rm -fr /tmp/docker_tmp
-
-travis-docker-image :
-	@sudo rm -fr /tmp/docker_tmp
-	@mkdir -p /tmp/docker_tmp/ntf
-	@cp -r $(thisdir)/../docker/* /tmp/docker_tmp
-	@cp -rf $(thisdir)/../../ntf/bmv2 /tmp/docker_tmp/ntf
-	@cp -rf $(thisdir)/../../ntf/tools /tmp/docker_tmp/ntf
-	@cp /tmp/docker_tmp/start.sh /tmp/docker_tmp/ntf/tools/start.sh
-	@cp /tmp/docker_tmp/startv2.sh /tmp/docker_tmp/ntf/tools/startv2.sh
-	@cp /tmp/docker_tmp/bm_start.sh /tmp/docker_tmp/ntf/tools/bm_start.sh
-	@echo "CMD /bin/bash" >> /tmp/docker_tmp/Dockerfile_travis
-	@sudo docker build -t p4dockerswitch_bmv2 /tmp/docker_tmp
-	@rm -fr /tmp/docker_tmp
-

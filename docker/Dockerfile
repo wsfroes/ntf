@@ -144,7 +144,9 @@ RUN mkdir __trash; cd __trash; \
 
 ADD ntf /ntf
 
-RUN cd /ntf/p4-hlir ; \
+RUN cd /ntf; \
+    git clone https://github.com/p4lang/p4-hlir.git; \
+    cd p4-hlir; \
     python setup.py install
 
 ENV VTYSH_PAGER more
