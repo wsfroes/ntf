@@ -25,8 +25,11 @@ git clone https://github.com/p4lang/p4-hlir.git
 echo "Cloning switch ..."
 git clone https://github.com/p4lang/switch.git
 
-echo "Cloning scapy-vxlan ..."
-sudo apt-get remove -y python-scapy
-git clone https://github.com/p4lang/scapy-vxlan.git
-cd scapy-vxlan
+wget http://archive.apache.org/dist/thrift/0.9.2/thrift-0.9.2.tar.gz
+tar -xzvf thrift-0.9.2.tar.gz
+cd thrift-0.9.2
+./configure --with-cpp=yes --with-c_glib=no --with-java=no --with-ruby=no --with-erlang=no --with-go=no --with-nodejs=no
+make -j2 && sudo make install
+cd lib/py
 sudo python setup.py install
+cd $WORKSPACE
