@@ -9,7 +9,11 @@ git clone https://github.com/p4lang/ptf.git
 
 echo "Cloning p4-bmv2 ..."
 git clone https://github.com/p4lang/behavioral-model.git p4-bmv2
-cd p4-bmv2 && ./install_deps.sh && cd ..
+cd p4-bmv2
+bash travis/install-nanomsg.sh
+sudo ldconfig
+bash travis/install-nnpy.sh
+cd ..
 
 echo "Cloning p4c-bmv2 ..."
 git clone https://github.com/p4lang/p4c-bm.git p4c-bmv2

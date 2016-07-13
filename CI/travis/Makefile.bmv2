@@ -33,7 +33,7 @@ p4c-bmv2.ts:
 	@touch $@
 
 setup-target.ts: p4-bmv2.ts p4c-bmv2.ts
-	cd ../../switch; git submodule update --init --recursive; ./autogen.sh; cd -; \
+	cd $(thisdir)/../../switch; git submodule update --init --recursive; ./autogen.sh; cd -; \
 	mkdir -p $(builddir)/switch; cd $(builddir)/switch; \
 	$(thisdir)/../../switch/configure --prefix=$(installdir) --with-bmv2 --enable-thrift --with-switchlink; cd -;
 	@touch $@
