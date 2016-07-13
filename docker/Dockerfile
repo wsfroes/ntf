@@ -138,7 +138,7 @@ RUN mkdir -p /tmp/bmv2; \
     sudo ldconfig; \
     bash travis/install-nnpy.sh; \
     rm -rf /tmp/bmv2
-
+    
 ADD ntf /ntf
 
 RUN cd /ntf; \
