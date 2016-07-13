@@ -2,11 +2,17 @@
 
 sudo: required
 
+dist: trusty
+
 language: cpp
 
 services:
   - docker
 
+env:
+  global:
+    - PYP_ADD="/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"
+    
 addons:
   apt:
     sources:
