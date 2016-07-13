@@ -85,6 +85,7 @@ before_install:
   - sudo apt-get remove python-scapy
   - git clone https://github.com/p4lang/scapy-vxlan.git && cd scapy-vxlan && sudo python setup.py install && cd ..
   - sudo ldconfig
+  - export PYTHONPATH=$PYP_ADD:$PYTHONPATH
   - bash CI/travis/build_compile_switch.sh
 
 install:
