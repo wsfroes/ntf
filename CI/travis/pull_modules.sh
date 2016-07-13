@@ -17,7 +17,7 @@ cd ..
 
 echo "Cloning p4c-bmv2 ..."
 git clone https://github.com/p4lang/p4c-bm.git p4c-bmv2
-cd p4c-bmv2 && sudo pip install -r requirements.txt && cd..
+cd p4c-bmv2 && sudo pip install -r requirements.txt && cd ..
 
 echo "Cloning p4-hlir"
 git clone https://github.com/p4lang/p4-hlir.git
