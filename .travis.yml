@@ -90,7 +90,7 @@ before_install:
   - cd CI/travis && make -f Makefile.bmv2 driver-switchlink && cd ../..
 
 install:
-  - cd makefiles && make -f bmv2-docker-image && cd ..
+  - cd makefiles && make -f docker.mk bmv2-docker-image && cd ..
 
 # command to run tests, e.g. python setup.py test
 script:
