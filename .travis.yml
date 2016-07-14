@@ -6,7 +6,9 @@ dist: trusty
 
 language: cpp
 
-cache : pip 
+cache : 
+  - pip
+  - apt
 
 services:
   - docker
@@ -92,11 +94,15 @@ before_install:
 
 install:
   - bash CI/travis/pull_modules.sh
+  - cd CI/travis/ && git clone git://github.com/mininet/mininet && cd mininet
+  - git checkout -b 2.2.1 2.2.1 && util/install.sh -fnv
+  - cd ..
 
 # command to run tests, e.g. python setup.py test
 script:
-  - cd CI/travis/ && make -f Makefile.bmv2 driver-switchlink
+  - make -f Makefile.bmv2 driver-switchlink
   - cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk base-docker-image
   - cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk bmv2-docker-image
   - docker images | grep p4dockerswitch_bmv2
   - cd /home/travis/build/p4lang/ntf/tools && sudo ./veth_setup.sh
+  - cd /home/travis/build/p4lang/ntf/mininet && sudo ./int_ref_topology.py
