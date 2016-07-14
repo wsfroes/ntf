@@ -9,6 +9,11 @@ language: cpp
 cache : 
   - pip
   - apt
+  directories:
+    - $HOME/.cache/pip
+
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
 
 services:
   - docker
@@ -105,4 +110,3 @@ script:
   - cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk bmv2-docker-image
   - docker images | grep p4dockerswitch_bmv2
   - cd /home/travis/build/p4lang/ntf/tools && sudo ./veth_setup.sh
-  - cd /home/travis/build/p4lang/ntf/mininet && sudo ./int_ref_topology.py
