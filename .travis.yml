@@ -87,8 +87,8 @@ before_install:
   - sudo ldconfig
   - export PYTHONPATH=$PYP_ADD:$PYTHONPATH
   - bash CI/travis/pull_modules.sh
-  - cd CI/travis && make -f Makefile.bmv2 driver-switchlink &
-  - cd ../../makefiles && make -f docker.mk base-docker-image &
+  - cd CI/travis && make -f Makefile.bmv2 driver-switchlink & && cd ../..
+  - cd makefiles && make -f docker.mk base-docker-image &
   - wait
 
 install:
