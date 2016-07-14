@@ -95,7 +95,7 @@ before_install:
 
 
 install:
-  - bash CI/travis/pull_modules.sh
+  - bash /home/travis/build/p4lang/ntf/CI/travis/pull_modules.sh
 
 # command to run tests, e.g. python setup.py test
 script:
