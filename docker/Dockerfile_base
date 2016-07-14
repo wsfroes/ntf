@@ -129,24 +129,12 @@ RUN echo "set autoindent" >> /root/.vimrc
 RUN echo "set smartindent" >> /root/.vimrc
 
 # install additional bmv2 deps
-RUN mkdir -p /scripts/travis
-COPY scripts/install-thrift.sh /scripts/travis
-COPY scripts/install-nanomsg.sh /scripts/travis
-COPY scripts/install-nnpy.sh /scripts/travis
-COPY scripts/check-nnpy.py /scripts/travis
-RUN mkdir __trash; cd __trash; \
-    bash ../scripts/travis/install-thrift.sh; \
-    bash ../scripts/travis/install-nanomsg.sh; \
+RUN mkdir -p /tmp/bmv2; \
+    cd /tmp/bmv2; \
+    git clone https://github.com/p4lang/behavioral-model.git bmv2; \
+    cd bmv2; \
+    bash travis/install-thrift.sh; \
+    bash travis/install-nanomsg.sh; \
     sudo ldconfig; \
-    bash ../scripts/travis/install-nnpy.sh; \
-    cd ..; rm -rf __trash;
-
-
-ADD ntf /ntf
-
-RUN cd /ntf; \
-    git clone https://github.com/p4lang/p4-hlir.git; \
-    cd p4-hlir; \
-    python setup.py install
-
-ENV VTYSH_PAGER more
+    bash travis/install-nnpy.sh; \
+    rm -rf /tmp/bmv2

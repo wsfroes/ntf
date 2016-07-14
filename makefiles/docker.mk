@@ -23,6 +23,10 @@ setup-docker-image:
 	@cp /tmp/docker_tmp/start.sh /tmp/docker_tmp/ntf/tools/start.sh
 	@cp /tmp/docker_tmp/startv2.sh /tmp/docker_tmp/ntf/tools/startv2.sh
 	@cp /tmp/docker_tmp/bm_start.sh /tmp/docker_tmp/ntf/tools/bm_start.sh
+	@echo "RUN pip install tenjin ; " >> /tmp/docker_tmp/Dockerfile
+
+base-docker-image:
+	@cd $(thisdir)/../docker; sudo docker build -f Dockerfile_base -t p4dockerswitch_base .
 
 bmv2-docker-image : setup-docker-image
 	@echo "CMD /bin/bash" >> /tmp/docker_tmp/Dockerfile
