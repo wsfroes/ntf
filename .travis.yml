@@ -92,7 +92,7 @@ before_install:
   - wait
 
 install:
-  - make -f docker.mk bmv2-docker-image && cd ..
+  - cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk bmv2-docker-image && cd ..
 
 # command to run tests, e.g. python setup.py test
 script:
