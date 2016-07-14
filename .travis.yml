@@ -6,16 +6,14 @@ dist: trusty
 
 language: cpp
 
+cache : pip 
+
 services:
   - docker
 
 env:
   global:
     - PYP_ADD="/usr/local/lib/python2.7/dist-packages:/usr/local/lib/python2.7/site-packages"  
-  matrix: 
-    - TEST_CASE=switch_build
-    - TEST_CASE=docker_build
-    - TEST_CASE=mininet_sanity
     
 addons:
   apt:
@@ -90,8 +88,9 @@ before_install:
   - git clone https://github.com/p4lang/scapy-vxlan.git && cd scapy-vxlan && sudo python setup.py install && cd ..
   - sudo ldconfig
   - export PYTHONPATH=$PYP_ADD:$PYTHONPATH
-  - git clone git://github.com/mininet/mininet mininet_install
-  - cd mininet_install && git checkout -b 2.2.1 2.2.1
+  - cd /home/travis/build/p4lang/ntf/CI/travis
+  - git clone git://github.com/mininet/mininet
+  - cd mininet && git checkout -b 2.2.1 2.2.1
   - util/install.sh -fnv
 
 
@@ -100,8 +99,8 @@ install:
 
 # command to run tests, e.g. python setup.py test
 script:
-  - if [ "$TEST_CASE" = "switch_build"] ; then cd /home/travis/build/p4lang/ntf/CI/travis && make -f Makefile.bmv2 driver-switchlink; fi
-  - if [ "$TEST_CASE" = "docker_build"] ; then cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk base-docker-image ; fi
-  - if [ "$TEST_CASE" = "docker_build"] ; then cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk bmv2-docker-image ; fi
+  - cd /home/travis/build/p4lang/ntf/CI/travis && make -f Makefile.bmv2 driver-switchlink
+  - cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk base-docker-image
+  - cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk bmv2-docker-image
   - docker images | grep p4dockerswitch_bmv2
-  - if [ "$TEST_CASE" = "docker_build"] ; then cd /home/travis/build/p4lang/ntf/tools && sudo ./veth_setup.sh ; fi
+  - cd /home/travis/build/p4lang/ntf/tools && sudo ./veth_setup.sh
