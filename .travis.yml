@@ -88,18 +88,14 @@ before_install:
   - git clone https://github.com/p4lang/scapy-vxlan.git && cd scapy-vxlan && sudo python setup.py install && cd ..
   - sudo ldconfig
   - export PYTHONPATH=$PYP_ADD:$PYTHONPATH
-  - cd /home/travis/build/p4lang/ntf/CI/travis
-  - git clone git://github.com/mininet/mininet
-  - cd mininet && git checkout -b 2.2.1 2.2.1
-  - util/install.sh -fnv
 
 
 install:
-  - bash /home/travis/build/p4lang/ntf/CI/travis/pull_modules.sh
+  - bash CI/travis/pull_modules.sh
 
 # command to run tests, e.g. python setup.py test
 script:
-  - cd /home/travis/build/p4lang/ntf/CI/travis && make -f Makefile.bmv2 driver-switchlink
+  - cd CI/travis/ && make -f Makefile.bmv2 driver-switchlink
   - cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk base-docker-image
   - cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk bmv2-docker-image
   - docker images | grep p4dockerswitch_bmv2
