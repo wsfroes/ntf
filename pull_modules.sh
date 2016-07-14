@@ -27,7 +27,7 @@ git clone https://github.com/p4lang/p4-hlir.git
 
 cd $WORKSPACE
 echo "Cloning switch ..."
-git clone https://github.com/barefootnetworks/switch-int-demo.git switch
+git clone git@github.com:barefootnetworks/switch-int-demo.git switch
 cd $WORKSPACE/switch
 git checkout bf8aa22810defc4801d3a1d6119254e9c5ddb937
 
