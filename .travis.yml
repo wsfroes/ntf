@@ -95,6 +95,7 @@ before_install:
   - sudo ldconfig
   - export PYTHONPATH=$PYP_ADD:$PYTHONPATH
   - bash CI/travis/pull_modules.sh
+  - make -f Makefile.bmv2 driver-switchlink
 
 install:
   - cd CI/travis/ && git clone git://github.com/mininet/mininet && cd mininet
@@ -103,7 +104,6 @@ install:
 
 # command to run tests, e.g. python setup.py test
 script:
-  - make -f Makefile.bmv2 driver-switchlink
   - cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk base-docker-image
   - cd /home/travis/build/p4lang/ntf/makefiles && make -f docker.mk bmv2-docker-image
   - docker images | grep p4dockerswitch_bmv2
