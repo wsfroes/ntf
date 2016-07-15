@@ -88,6 +88,7 @@ before_install:
   - export LDFLAGS="$LDFLAGS -L$HOME/thrift/lib"
   - export CPPFLAGS="$CPPFLAGS -I$HOME/thrift/include"
   - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/thrift/lib
+  - sudo ldconfig
   - sudo pip install ctypesgen
   - sudo apt-get remove python-scapy
   - git clone https://github.com/p4lang/scapy-vxlan.git && cd scapy-vxlan && sudo python setup.py install && cd ..
@@ -109,3 +110,4 @@ script:
   - docker images | grep p4dockerswitch_bmv2
   - cd /home/travis/build/p4lang/ntf/tools
   - sudo ./veth_setup.sh
+  - cd /home/travis/build/p4lang/ntf/mininet && sudo ./int_ref_topology.py
