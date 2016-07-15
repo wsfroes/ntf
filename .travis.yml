@@ -95,10 +95,10 @@ before_install:
   - sudo ldconfig
   - export PYTHONPATH=$PYP_ADD:$PYTHONPATH
   - bash CI/travis/pull_modules.sh
-  - make -f Makefile.bmv2 driver-switchlink
+  - cd CI/travis/ && make -f Makefile.bmv2 driver-switchlink
 
 install:
-  - cd CI/travis/ && git clone git://github.com/mininet/mininet && cd mininet
+  - cd /home/travis/build/p4lang/ntf/CI/travis/ && git clone git://github.com/mininet/mininet && cd mininet
   - git checkout -b 2.2.1 2.2.1 && util/install.sh -fnv
   - cd ..
 
